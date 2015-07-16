@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0232794A1B57541600C4239B /* ATLMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023279491B57541600C4239B /* ATLMMapViewController.m */; };
 		0A0C242719477D8F00401B74 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0C242619477D8F00401B74 /* Foundation.framework */; };
 		0A0C242919477D8F00401B74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0C242819477D8F00401B74 /* CoreGraphics.framework */; };
 		0A0C242B19477D8F00401B74 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0C242A19477D8F00401B74 /* UIKit.framework */; };
@@ -91,6 +92,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		023279481B57541600C4239B /* ATLMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATLMMapViewController.h; sourceTree = "<group>"; };
+		023279491B57541600C4239B /* ATLMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATLMMapViewController.m; sourceTree = "<group>"; };
 		0A0C242319477D8F00401B74 /* Atlas Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Atlas Messenger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A0C242619477D8F00401B74 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A0C242819477D8F00401B74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -341,6 +344,8 @@
 				251D8D9C1A9688C40000BFA2 /* ATLMQRScannerController.m */,
 				251D8D9D1A9688C40000BFA2 /* ATLMRegistrationViewController.h */,
 				251D8D9E1A9688C40000BFA2 /* ATLMRegistrationViewController.m */,
+				023279481B57541600C4239B /* ATLMMapViewController.h */,
+				023279491B57541600C4239B /* ATLMMapViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -687,6 +692,7 @@
 				251D8DCD1A9688C50000BFA2 /* ATLMSession.m in Sources */,
 				251D8DC51A9688C50000BFA2 /* ATLMConversationViewController.m in Sources */,
 				251D8DD91A9688C50000BFA2 /* ATLMSplashView.m in Sources */,
+				0232794A1B57541600C4239B /* ATLMMapViewController.m in Sources */,
 				251D8DC01A9688C50000BFA2 /* ATLMAppDelegate.m in Sources */,
 				251D8DC61A9688C50000BFA2 /* ATLMImageViewController.m in Sources */,
 				251D8DD31A9688C50000BFA2 /* ATLMParticipantDataSource.m in Sources */,

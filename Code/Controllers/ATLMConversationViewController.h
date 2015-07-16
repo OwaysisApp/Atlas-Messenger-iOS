@@ -20,7 +20,7 @@
 
 #import <Atlas/Atlas.h>
 #import "ATLMApplicationController.h"
-
+#import "ATLMMapViewController.h"
 /**
  @abstract Subclass of the `ATLMConversationViewController`. Presents a user interface for displaying and sending messages.
  */
@@ -30,5 +30,9 @@
  @abstract The controller object for the application.
  */
 @property (nonatomic) ATLMApplicationController *applicationController;
+@property (nonatomic) ATLMMapViewController *mapViewController;
+
+@property (nonatomic) NSLayoutConstraint *mapConstraint;
+@property (nonatomic) CGFloat mapRatio;
 
 @end

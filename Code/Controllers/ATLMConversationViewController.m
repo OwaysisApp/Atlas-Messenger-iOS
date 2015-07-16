@@ -139,6 +139,9 @@ NSString *const ATLMConversationViewControllerAccessibilityLabel = @"Conversatio
 NSString *const ATLMDetailsButtonAccessibilityLabel = @"Details Button";
 NSString *const ATLMDetailsButtonLabel = @"Details";
 
+@synthesize mapRatio = _mapRatio;
+@synthesize mapConstraint = _mapConstraint;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -155,13 +158,32 @@ NSString *const ATLMDetailsButtonLabel = @"Details";
     
     self.participantDataSource = [ATLMParticipantDataSource participantDataSourceWithPersistenceManager:self.applicationController.persistenceManager];
     self.participantDataSource.excludedIdentifiers = [NSSet setWithObject:self.layerClient.authenticatedUserID];
+    [self.mapViewController viewDidLoad];
+    
+    [self addChildViewController:self.mapViewController];
+    [self.view addSubview:self.mapViewController.view];
+    [self.mapViewController didMoveToParentViewController:self];
+    self.mapViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self configureMapLayoutConstraints];
+    
+    
+    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapMap:)];
+    [self.mapViewController.mapView addGestureRecognizer:tapRec];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self configureTitle];
+    [self.mapViewController viewWillAppear:animated];
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.mapViewController viewDidAppear:animated];
+}
+
 
 - (void)dealloc
 {
@@ -533,4 +555,63 @@ NSString *const ATLMDetailsButtonLabel = @"Details";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conversationMetadataDidChange:) name:ATLMConversationMetadataDidChangeNotification object:nil];
 }
 
+
+- (void)configureMapLayoutConstraints
+{
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.mapViewController.view
+                              attribute:NSLayoutAttributeLeft
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view attribute:NSLayoutAttributeLeft
+                              multiplier:1.0
+                              constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.mapViewController.view
+                              attribute:NSLayoutAttributeRight
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeRight
+                              multiplier:1.0
+                              constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.mapViewController.view
+                              attribute:NSLayoutAttributeTop
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeTop
+                              multiplier:1
+                              constant:0]];
+    
+    self.mapConstraint = [NSLayoutConstraint
+                          constraintWithItem:self.mapViewController.view
+                          attribute:NSLayoutAttributeBottom
+                          relatedBy:NSLayoutRelationEqual
+                          toItem:self.view
+                          attribute:NSLayoutAttributeBottom
+                          multiplier:self.mapRatio constant:0];
+    [self.view addConstraint: self.mapConstraint];
+}
+
+- (void) toggleMapRatioConstraint
+{
+    NSLayoutConstraint* newMapConstraint = [NSLayoutConstraint
+                                         constraintWithItem:self.mapViewController.view
+                                         attribute:NSLayoutAttributeBottom
+                                         relatedBy:NSLayoutRelationEqual
+                                         toItem:self.view
+                                         attribute:NSLayoutAttributeBottom
+                                         multiplier:self.mapRatio constant:0];
+    [self.view removeConstraint: self.mapConstraint];
+    
+    self.mapConstraint = newMapConstraint;
+    [self.view addConstraint: self.mapConstraint];
+}
+
+-(void) didTapMap:(UIGestureRecognizer *)gestureRecognizer {
+    self.mapRatio = ((self.mapRatio == 1.0) ? 0.4 : 1.0);
+    [self toggleMapRatioConstraint];
+    [self.mapViewController updateAnnotation:CLLocationCoordinate2DMake(0,0)];
+}
+
 @end
+
