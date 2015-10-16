@@ -19,7 +19,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <LayerKit/LayerKit.h>
 #import "ATLMApplicationController.h"
 
 @class ATLMSettingsViewController;
